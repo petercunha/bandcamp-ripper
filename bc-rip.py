@@ -1,3 +1,6 @@
+# USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!
+# coding: utf-8
+
 import sys
 import os
 import urllib2
@@ -8,6 +11,9 @@ def main():
 	if len(sys.argv) == 1:
 		exit("\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
 	else:
+		print("\nThe Bandcamp Ripper")
+		print("by https://github.com/petercunha")
+		print("USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!\n")
 		startRip(sys.argv[1])
 	pass
 
@@ -30,11 +36,19 @@ def startRip(URL):
 	if not os.path.exists(dirname):
 		os.makedirs(dirname)
 
-	# Download each file with some split witchcraft
+	print("Downloading MP3's from " + dirname + "...")
+	# Download each file
 	for x in xrange(len(download_arr)-1):
-		download("https://" + download_arr[x+1].split('"')[0], 
-				 dirname + "/" + str(x+1) + ".) " + name_arr[x+2].split('"')[0])
+		# String-splitting witchcraft
+		dl = "https://" + download_arr[x+1].split('"')[0]
+		fname = dirname + "/" + str(x+1) + ".) " + name_arr[x+2].split('"')[0]
+
+		download(dl, fname)
+		print("[✓] " + name_arr[x+2].split('"')[0])
 		pass
+	print("\nDownload complete!")
+	print("Thanks for using Bandcamp Ripper.\n")
+
 
 # Downloads file at URL to specified location and filename
 def download(url, filename):
