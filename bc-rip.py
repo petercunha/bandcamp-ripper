@@ -11,9 +11,11 @@ def main():
 	if len(sys.argv) == 1:
 		exit("\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
 	else:
-		print("\nThe Bandcamp Ripper")
+		print("")
+		print("The Bandcamp Ripper")
 		print("by https://github.com/petercunha")
-		print("USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!\n")
+		print("USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!")
+		print("")
 		startRip(sys.argv[1])
 	pass
 
@@ -37,6 +39,7 @@ def startRip(URL):
 		os.makedirs(dirname)
 
 	print("Downloading MP3's from " + dirname + "...")
+
 	# Download each file
 	for x in xrange(len(download_arr)-1):
 		# String-splitting witchcraft
@@ -46,8 +49,11 @@ def startRip(URL):
 		download(dl, fname)
 		print("[✓] " + name_arr[x+2].split('"')[0])
 		pass
-	print("\nDownload complete!")
-	print("Thanks for using Bandcamp Ripper.\n")
+
+	print("")
+	print("Download complete!")
+	print("Thanks for using Bandcamp Ripper.")
+	print("")
 
 
 # Downloads file at URL to specified location and filename
