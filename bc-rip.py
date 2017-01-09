@@ -32,8 +32,9 @@ def startRip(URL):
 	name_arr = source.split('"title":"')
 
 	# dirname format: Artist - Album Name
-	dirname = (URL.split('://')[1].split('.bandcamp')[0] + " - " + URL.split('album/')[1].replace("-", " ")).title()
-	
+	album = source.split('<title>')[1].split('</title>')[0].split(" | ")
+	dirname = album[1] + " - " + album[0]
+
 	# Create dir to download music if it doesn't exist
 	if not os.path.exists(dirname):
 		os.makedirs(dirname)
@@ -44,12 +45,13 @@ def startRip(URL):
 	for x in xrange(len(download_arr)-1):
 		# String-splitting witchcraft
 		dl = "https://" + download_arr[x+1].split('"')[0]
-		fname = dirname + "/" + str(x+1) + ".) " + name_arr[x+2].split('"')[0]
+		fname = dirname + "/" + str(x+1) + ". " + name_arr[x+2].split('"')[0]
 
 		download(dl, fname)
 		print("[✓] " + name_arr[x+2].split('"')[0])
 		pass
 
+	# Download complete
 	print("")
 	print("Download complete!")
 	print("Thanks for using Bandcamp Ripper.")
