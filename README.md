@@ -1,5 +1,5 @@
 # bandcamp-ripper
-You put in a Bandcamp album URL. This spits out MP3 files (128 kbps). 
+You put in a Bandcamp album URL. This spits out MP3 files. 
 
 It is illegal to use this program without express permission from the artist. If you like the music, you should support the musician!
 
