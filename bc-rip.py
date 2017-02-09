@@ -1,10 +1,14 @@
 # USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!
 # coding: utf-8
 
+# Necessary modules
 import sys
 import os
 import urllib2
 import json
+
+# Colored output
+from colorama import Fore, Back, Style
 
 def main():
 	# Check for command line args
@@ -12,10 +16,10 @@ def main():
 		exit("\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
 	else:
 		print("")
-		print("The Bandcamp Ripper")
+		print(Style.BRIGHT + "The Bandcamp Ripper" + Style.RESET_ALL)
 		print("by https://github.com/petercunha")
-		print("USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!")
-		print("")
+		print(Fore.RED + "USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!")
+		print(Style.RESET_ALL + "")
 		startRip(sys.argv[1])
 	pass
 
@@ -39,7 +43,7 @@ def startRip(URL):
 	if not os.path.exists(dirname):
 		os.makedirs(dirname)
 
-	print("Downloading MP3's from " + dirname + "...")
+	print("Downloading MP3's from " + Style.BRIGHT + dirname + Style.RESET_ALL + "...")
 
 	# Download each file
 	for x in xrange(len(download_arr)-1):
@@ -48,11 +52,11 @@ def startRip(URL):
 		fname = dirname + "/" + str(x+1) + ". " + name_arr[x+2].split('"')[0]
 
 		download(dl, fname)
-		print("[✓] " + name_arr[x+2].split('"')[0])
+		print(Style.RESET_ALL + "[" + Fore.GREEN + Style.BRIGHT + "✓" + Style.RESET_ALL + "] " + Fore.MAGENTA + name_arr[x+2].split('"')[0])
 		pass
 
 	# Download complete
-	print("")
+	print(Style.RESET_ALL + "" + Style.DIM)
 	print("Download complete!")
 	print("Thanks for using Bandcamp Ripper.")
 	print("")
