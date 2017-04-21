@@ -10,11 +10,18 @@ import json
 # Colored output
 from colorama import Fore, Back, Style
 
+# Main
 def main():
-	# Check for command line args
 	if len(sys.argv) == 1:
-		exit("\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
+		# Check for command line args
+		exit(Fore.RED + "\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
+	elif "/album/" not in sys.argv[1]:
+		# Check for URL validity
+		exit(Fore.RED + "\nYou did not provide a URL to the album!\nusage: python bc-rip.py <bandcamp album URL>\n\n" +
+			 "Make sure that you're using the album URL, not just a link to the artist's page.\n" +
+			 "Example of an album URL: https://CoolestArtist.bandcamp.com/album/CoolestAlbumEver")
 	else:
+		# Checks passed. Start the program.
 		print("")
 		print(Style.BRIGHT + "The Bandcamp Ripper" + Style.RESET_ALL)
 		print("by https://github.com/petercunha")
@@ -33,11 +40,16 @@ def startRip(URL):
 
 	# Parse HTML into meaningful arrays of data
 	download_arr = source.split('"mp3-128":"//')
+	song_number = len(download_arr) - 1;
 	name_arr = source.split('"title":"')
 
 	# dirname format: Artist - Album Name
 	album = source.split('<title>')[1].split('</title>')[0].split(" | ")
 	dirname = album[1] + " - " + album[0]
+
+	# Exit if album has no songs or is restricted
+	if song_number == 0:
+		exit("Unable to download the album. It appears that the artist has opted to restrict bandcamp downloads.")
 
 	# Create dir to download music if it doesn't exist
 	if not os.path.exists(dirname):
@@ -46,14 +58,15 @@ def startRip(URL):
 	print("Downloading MP3's from " + Style.BRIGHT + dirname + Style.RESET_ALL + "...")
 
 	# Download each file
-	for x in xrange(len(download_arr)-1):
+	for x in xrange(song_number):
 		# String-splitting witchcraft
 		dl = "https://" + download_arr[x+1].split('"')[0]
 		fname = dirname + "/" + str(x+1) + ". " + name_arr[x+2].split('"')[0]
 
+		# Download the file
 		download(dl, fname)
-		print(Style.RESET_ALL + "[" + Fore.GREEN + Style.BRIGHT + "✓" + Style.RESET_ALL + "] " + Fore.MAGENTA + name_arr[x+2].split('"')[0])
-		pass
+		print(Style.RESET_ALL + "[" + Fore.GREEN + Style.BRIGHT + "✓" +
+			  Style.RESET_ALL + "] " + Fore.MAGENTA + name_arr[x+2].split('"')[0])
 
 	# Download complete
 	print(Style.RESET_ALL + "" + Style.DIM)
