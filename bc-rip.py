@@ -12,7 +12,6 @@ from colorama import Fore, Back, Style
 
 # Main
 def main():
-	# Test
 	if len(sys.argv) == 1:
 		# Check for command line args
 		exit(Fore.RED + "\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
