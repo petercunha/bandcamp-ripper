@@ -63,7 +63,7 @@ def startRip(URL):
 	if not os.path.exists(dirname):
 		os.makedirs(dirname)
 
-	print("Downloading MP3's from " + Style.BRIGHT + dirname + Style.RESET_ALL + "...")
+	print("Downloading MP3's from " + Style.BRIGHT + dirname + Style.RESET_ALL + " into folder: " + Style.BRIGHT + os.getcwd() + "/" + dirname + Style.RESET_ALL)
 
 	# Download each file
 	for x in xrange(song_number):

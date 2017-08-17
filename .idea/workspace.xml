@@ -21,8 +21,8 @@
       <file leaf-file-name="bc-rip.py" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/bc-rip.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="337">
-              <caret line="48" column="47" lean-forward="true" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
+            <state relative-caret-position="371">
+              <caret line="71" column="77" lean-forward="true" selection-start-line="71" selection-start-column="77" selection-end-line="71" selection-end-column="77" />
               <folding>
                 <element signature="e#138#148#0" expanded="true" />
               </folding>
@@ -328,8 +328,8 @@
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/bc-rip.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="337">
-          <caret line="48" column="47" lean-forward="true" selection-start-line="48" selection-start-column="47" selection-end-line="48" selection-end-column="47" />
+        <state relative-caret-position="371">
+          <caret line="71" column="77" lean-forward="true" selection-start-line="71" selection-start-column="77" selection-end-line="71" selection-end-column="77" />
           <folding>
             <element signature="e#138#148#0" expanded="true" />
           </folding>
