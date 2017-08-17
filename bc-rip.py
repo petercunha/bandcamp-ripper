@@ -14,7 +14,7 @@ from colorama import Fore, Style
 def main():
 	if len(sys.argv) == 1:
 		# Check for command line args
-		exit(Fore.RED + "\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n")
+		exit(Fore.RED + "\nYou didn't provide a URL!\nusage: python bc-rip.py <bandcamp album URL>\n" + Fore.RED)
 	elif "/album/" not in sys.argv[1]:
 		# Check for URL validity
 		exit(
