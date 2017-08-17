@@ -31,10 +31,7 @@ def main():
 			+ Fore.RESET
 		)
 		print(Style.RESET_ALL + "")
-		try:
-			startRip(sys.argv[1])
-		except urllib2.HTTPError as err:
-			exit(Fore.RED + "HTTP Error: " + str(err.code) + " occurred. Check the URL and try again?" + Fore.RESET)
+		startRip(sys.argv[1])
 	pass
 
 
@@ -43,8 +40,11 @@ def startRip(URL):
 
 	# Grab HTML source of Bandcamp album page
 	req = urllib2.Request(URL)
-	response = urllib2.urlopen(req)
-	source = response.read()
+	try:
+		response = urllib2.urlopen(req)
+		source = response.read()
+	except urllib2.HTTPError as err:
+		exit(Fore.RED + "HTTP Error: " + str(err.code) + " occurred. Check the URL and try again?" + Fore.RESET)
 
 	# Parse HTML into meaningful arrays of data
 	download_arr = source.split('"mp3-128":"//')
