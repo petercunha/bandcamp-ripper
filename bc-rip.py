@@ -30,7 +30,10 @@ def main():
 			Fore.RED + "USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!"
 		)
 		print(Style.RESET_ALL + "")
-		startRip(sys.argv[1])
+		try:
+			startRip(sys.argv[1])
+		except urllib2.HTTPError as err:
+			exit("HTTP Error: " + str(err.code) + " occurred. Check the URL and try again?")
 	pass
 
 
