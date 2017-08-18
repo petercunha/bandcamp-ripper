@@ -20,7 +20,7 @@ def main():
 		exit(
 			Fore.RED + "\nYou did not provide a URL to the album!\nusage: python bc-rip.py <bandcamp album URL>\n\n" +
 			"Make sure that you're using the album URL, not just a link to the artist's page.\n" +
-			"Example of an album URL: https://CoolestArtist.bandcamp.com/album/CoolestAlbumEver" + Fore.RESET)
+			"Example of an album URL: https://CoolestArtist.bandcamp.com/album/CoolestAlbumEver")
 	else:
 		# Checks passed. Start the program.
 		print("")
@@ -44,7 +44,7 @@ def startRip(URL):
 		response = urllib2.urlopen(req)
 		source = response.read()
 	except urllib2.HTTPError as err:
-		exit(Fore.RED + "HTTP Error: " + str(err.code) + " occurred. Check the URL and try again?" + Fore.RESET)
+		exit(Fore.RED + "HTTP Error: " + str(err.code) + " occurred. Check the URL and try again?")
 
 	# Parse HTML into meaningful arrays of data
 	download_arr = source.split('"mp3-128":"//')
@@ -57,7 +57,7 @@ def startRip(URL):
 
 	# Exit if album has no songs or is restricted
 	if song_number == 0:
-		exit(Fore.RED + "Unable to download the album. It appears that the artist has opted to restrict bandcamp downloads." + Fore.RESET)
+		exit(Fore.RED + "Unable to download the album. It appears that the artist has opted to restrict bandcamp downloads.")
 
 	# Create dir to download music if it doesn't exist
 	if not os.path.exists(dirname):
