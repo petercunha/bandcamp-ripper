@@ -53,7 +53,7 @@ def startRip(URL):
 
 	# dirname format: Artist - Album Name
 	album = source.split('<title>')[1].split('</title>')[0].split(" | ")
-	dirname = album[1] + " - " + album[0]
+	dirname = fix_filename(album[1] + " - " + album[0])
 
 	# Exit if album has no songs or is restricted
 	if song_number == 0:
@@ -69,7 +69,7 @@ def startRip(URL):
 	for x in xrange(song_number):
 		# String-splitting witchcraft
 		dl = "https://" + download_arr[x+1].split('"')[0]
-		fname = dirname + "/" + str(x+1) + ". " + name_arr[x+2].split('"')[0]
+		fname = dirname + "/" + str(x+1) + ". " + fix_filename(name_arr[x+2].split('"')[0])
 
 		# Download the file
 		download(dl, fname)
@@ -94,6 +94,10 @@ def download(url, filename):
 	with open(filename + ".mp3", 'wb') as output:
 		output.write(mp3file.read())
 	pass
+
+# Make filename compatible with OS
+def fix_filename(filename):
+	return filename.replace("/", "").replace("\\", "")
 
 
 # Finds string between two other strings
