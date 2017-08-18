@@ -44,7 +44,7 @@ def startRip(URL):
 		response = urllib2.urlopen(req)
 		source = response.read()
 	except urllib2.HTTPError as err:
-		exit(Fore.RED + "HTTP Error: " + str(err.code) + " occurred. Check the URL and try again?")
+		exit(Fore.RED + Style.BRIGHT + "HTTP Error " + str(err.code) + " occurred. Check the URL and try again?")
 
 	# Parse HTML into meaningful arrays of data
 	download_arr = source.split('"mp3-128":"//')
