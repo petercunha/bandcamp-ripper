@@ -97,7 +97,10 @@ def download(url, filename):
 
 # Make filename compatible with OS
 def fix_filename(filename):
-	return filename.replace("/", "").replace("\\", "")
+	fname = filename
+	for c in r'[]/\;,><&*:%=+@!#^()|?^':
+	    fname = fname.replace(c,'')
+	return fname
 
 
 # Finds string between two other strings
