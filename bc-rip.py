@@ -26,10 +26,6 @@ def main():
 		print("")
 		print(Style.BRIGHT + "The Bandcamp Ripper" + Style.RESET_ALL)
 		print("by https://github.com/petercunha")
-		print(
-			Fore.RED + "USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!"
-			+ Fore.RESET
-		)
 		print(Style.RESET_ALL + "")
 		startRip(sys.argv[1])
 	pass
