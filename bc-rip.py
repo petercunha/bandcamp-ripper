@@ -1,11 +1,17 @@
-# USAGE OF THIS PROGRAM IS ILLEGAL WITHOUT EXPRESS PERMISSION FROM THE ARTIST. USE AT YOUR OWN RISK!
+#!/usr/bin/python
 # coding: utf-8
 
 # Necessary modules
 import sys
 import os
 import urllib2
-
+# Optional mutagen for ID3 tags
+try:
+	import mutagen
+	tagging = True
+except ImportError:
+	tagging = False
+	pass
 # Colored output
 from colorama import Fore, Style
 
@@ -43,7 +49,7 @@ def startRip(URL):
 		exit(Fore.RED + Style.BRIGHT + "HTTP Error " + str(err.code) + " occurred. Check the URL and try again?")
 
 	# Parse HTML into meaningful arrays of data
-	download_arr = source.split('"mp3-128":"//')
+	download_arr = source.split('"mp3-128":"')
 	song_number = len(download_arr) - 1
 	name_arr = source.split('"title":"')
 
@@ -64,11 +70,16 @@ def startRip(URL):
 	# Download each file
 	for x in xrange(song_number):
 		# String-splitting witchcraft
-		dl = "https://" + download_arr[x+1].split('"')[0]
+		dl = download_arr[x+1].split('"')[0]
 		fname = dirname + "/" + str(x+1) + ". " + fix_filename(name_arr[x+2].split('"')[0])
 
 		# Download the file
 		download(dl, fname)
+		
+		# Tag if mutagen imported successfully
+		if tagging == True:
+			tag(fname, album[1], album[0], str(x+1), name_arr[x+2].split('"')[0])
+			
 		print(
 			Style.RESET_ALL + "[" + Fore.GREEN + Style.BRIGHT + "✓" +
 			Style.RESET_ALL + "] " + Fore.MAGENTA + name_arr[x+2].split('"')[0]
@@ -98,6 +109,15 @@ def fix_filename(filename):
 	    fname = fname.replace(c,'')
 	return fname
 
+def tag(filename, artist, album, track, title):
+	f = mutagen.File(filename + ".mp3", easy=True)
+	if f.tags:
+		return
+	f['title'] = title
+	f['artist'] = artist
+	f['tracknumber'] = track
+	f['album'] = album
+	f.save()
 
 # Finds string between two other strings
 def find_between(s, first, last):
