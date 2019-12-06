@@ -78,7 +78,7 @@ def startRip(URL):
 		
 		# Tag if mutagen imported successfully
 		if tagging == True:
-			tag(fname, album[1], album[0], str(x+1), name_arr[x+2].split('"')[0])
+			tag(fname, album[1].decode('utf-8'), album[0].decode('utf-8'), str(x+1), name_arr[x+2].decode('utf-8').split('"')[0])
 			
 		print(
 			Style.RESET_ALL + "[" + Fore.GREEN + Style.BRIGHT + "✓" +
