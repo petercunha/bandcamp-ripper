@@ -4,7 +4,7 @@
 # Necessary modules
 import sys
 import os
-import urllib2
+import urllib.request as urllib2
 # Optional mutagen for ID3 tags
 try:
 	import mutagen
@@ -49,12 +49,12 @@ def startRip(URL):
 		exit(Fore.RED + Style.BRIGHT + "HTTP Error " + str(err.code) + " occurred. Check the URL and try again?")
 
 	# Parse HTML into meaningful arrays of data
-	download_arr = source.split('"mp3-128":"')
+	download_arr = source.decode().split('"mp3-128":"')
 	song_number = len(download_arr) - 1
-	name_arr = source.split('"title":"')
+	name_arr = source.decode().split('"title":"')
 
 	# dirname format: Artist - Album Name
-	album = source.split('<title>')[1].split('</title>')[0].split(" | ")
+	album = source.decode().split('<title>')[1].split('</title>')[0].split(" | ")
 	dirname = fix_filename(album[1] + " - " + album[0])
 
 	# Exit if album has no songs or is restricted
@@ -68,7 +68,7 @@ def startRip(URL):
 	print("Downloading MP3's from " + Style.BRIGHT + dirname + Style.RESET_ALL)
 
 	# Download each file
-	for x in xrange(song_number):
+	for x in range(song_number):
 		# String-splitting witchcraft
 		dl = download_arr[x+1].split('"')[0]
 		fname = dirname + "/" + str(x+1) + ". " + fix_filename(name_arr[x+2].split('"')[0])
